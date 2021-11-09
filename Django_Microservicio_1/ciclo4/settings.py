@@ -27,9 +27,6 @@ SECRET_KEY = 'django-insecure-dydwh-3^$h5$i#g=2lwr#$lu=fys#fit$*oijxhr4*_#d8uy!h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CORS_ALLOW_ALL_ORIGINS = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,14 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'ciclo4App',
-    'corsheaders',
 ]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
+    'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
     'ALGORITHM': 'HS256',
     'USER_ID_FIELD': 'id',
@@ -109,8 +105,12 @@ WSGI_APPLICATION = 'ciclo4.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd7nuhnads51jle',
+        'USER': 'ewuexosrgkxxfa',
+        'PASSWORD': '16b935995b242ba14a4ff9661d085820ce8f56a8b33aa8e14d5329ea12a75c7c',
+        'HOST': 'ec2-3-228-86-183.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
