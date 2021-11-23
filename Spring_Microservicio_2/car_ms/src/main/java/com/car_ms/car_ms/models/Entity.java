@@ -1,27 +1,28 @@
 package com.car_ms.car_ms.models;
 
 import org.springframework.data.annotation.Id;
-
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import java.util.Date;
 
+import java.util.Date;
 public class Entity {
+
     @Id
-    private  String  id;
-    private  String  entity;
-    private  Integer capacityTurn;
+    private String entity;
+    private Integer capacityTurn;
     private Date lastChange;
 
-    public Entity(String id, String entity, Integer capacityTurn, Date lastChange) {
-        this.id = id;
+    // for deserialisation
+    public Entity() {
+        this.capacityTurn = 18;
+        this.lastChange = new Date();
+    }
+
+    public Entity(String entity) {
         this.entity = entity;
-        this.capacityTurn = capacityTurn;
-        this.lastChange = lastChange;
+        this.capacityTurn = 18;
+        this.lastChange = new Date();
     }
-
-    public String getId() {
-        return id;
-    }
-
 
     public String getEntity() {
         return entity;

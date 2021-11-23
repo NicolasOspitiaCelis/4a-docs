@@ -7,22 +7,20 @@ public class Turn {
     @Id
     private String id;
     private String entity;
-    private Integer document;
+    private Long document;
     private String names;
     private String lastName;
-    private String number;
+    private String phone;
     private Date date;
     private Integer turn;
 
-    private Turn(String id, String entity, Integer document, String names, String lastName, String number, Date date, Integer turn){
+    private Turn(String id, String entity, Long document, String names, String lastName, String number){
         this.id = id;
         this.entity = entity;
         this.document = document;
         this.names = names;
         this.lastName = lastName;
-        this.number = number;
-        this.date = date;
-        this.turn = turn;
+        this.phone = number;
     }
 
     public String getId() {
@@ -37,11 +35,11 @@ public class Turn {
         this.entity = entity;
     }
 
-    public Integer getDocument() {
+    public Long getDocument() {
         return document;
     }
 
-    public void setDocument(Integer document) {
+    public void setDocument(Long document) {
         this.document = document;
     }
 
@@ -61,12 +59,12 @@ public class Turn {
         this.lastName = lastName;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Date getDate() {
