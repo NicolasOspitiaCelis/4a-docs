@@ -2,13 +2,11 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from ciclo4App.models.User import User
 from ciclo4App.serializers.UserSerializer import UserSerializer
-from rest_framework.permissions import IsAuthenticated
 
 
 class UserDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
 
     def destroy(self, request, *args, **kwargs):
         pk = kwargs["pk"]

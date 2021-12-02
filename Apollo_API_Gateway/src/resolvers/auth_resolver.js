@@ -16,7 +16,8 @@ const usersResolver = {
         signUpUser: async (_, {
             userInput
         }, {
-            dataSources
+            dataSources,
+            userIdToken
         }) => {
             const authInput = {
                 username: userInput.username,
@@ -25,18 +26,21 @@ const usersResolver = {
                 email: userInput.email,
             }
             return await dataSources.authAPI.createUser(authInput);
-        },
-        logIn: (_, {
-            credentials
+        }
+
+    },
+
+    logIn: (_, {
+        credentials
+    }, {
+        dataSources
+    }) => dataSources.authAPI.authRequest(credentials),
+    refreshToken: (_, {
+            refresh
         }, {
             dataSources
-        }) => dataSources.authAPI.authRequest(credentials),
-        refreshToken: (_, {
-                refresh
-            }, {
-                dataSources
-            }) =>
-            dataSources.authAPI.refreshToken(refresh),
-    }
-};
+        }) =>
+        dataSources.authAPI.refreshToken(refresh),
+
+}
 module.exports = usersResolver;
