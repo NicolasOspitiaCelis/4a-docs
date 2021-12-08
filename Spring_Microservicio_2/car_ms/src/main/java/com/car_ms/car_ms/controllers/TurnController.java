@@ -36,12 +36,12 @@ public class TurnController {
         calendar2.setTime(entity.getLastChange());
 
 
-        if (calendar1.get(Calendar.HOUR_OF_DAY) >= 23 || calendar1.get(Calendar.HOUR_OF_DAY) <= 3){
+        if (calendar1.get(Calendar.HOUR_OF_DAY) <= 3 || calendar1.get(Calendar.HOUR_OF_DAY) >= 12){
           throw new LateTurnException("No hay turnos disponibles en este horario");
         }
 
         if (calendar2.get(Calendar.DAY_OF_YEAR) < calendar1.get(Calendar.DAY_OF_YEAR) ){
-            entity.setCapacityTurn(10);
+            entity.setCapacityTurn(50);
         }
 
         if (entity.getCapacityTurn() == 0){
@@ -52,7 +52,7 @@ public class TurnController {
         }
 
         entity.setLastChange(dt);
-        turn.setTurn(10-entity.getCapacityTurn());
+        turn.setTurn(50-entity.getCapacityTurn());
         turn.setDate(dt);
 
         entityRepository.save(entity);

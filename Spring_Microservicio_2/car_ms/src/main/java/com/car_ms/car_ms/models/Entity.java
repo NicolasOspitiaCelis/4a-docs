@@ -14,13 +14,13 @@ public class Entity {
 
     // for deserialisation
     public Entity() {
-        this.capacityTurn = 10;
+        this.capacityTurn = 50;
         this.lastChange = new Date();
     }
 
     public Entity(String entity) {
         this.entity = entity;
-        this.capacityTurn = 10;
+        this.capacityTurn = 50;
         this.lastChange = new Date();
     }
 
