@@ -12,13 +12,9 @@ const usersResolver = {
                 return null
         },
     },
+
     Mutation: {
-        signUpUser: async (_, {
-            userInput
-        }, {
-            dataSources,
-            userIdToken
-        }) => {
+        signUpUser: async (_, { userInput }, { dataSources }) => {
             const authInput = {
                 username: userInput.username,
                 password: userInput.password,
@@ -26,21 +22,15 @@ const usersResolver = {
                 email: userInput.email,
             }
             return await dataSources.authAPI.createUser(authInput);
-        }
+        },
 
-    },
+        logIn: (_, { credentials }, { dataSources }) =>
+        
+            dataSources.authAPI.authRequest(credentials),
 
-    logIn: (_, {
-        credentials
-    }, {
-        dataSources
-    }) => dataSources.authAPI.authRequest(credentials),
-    refreshToken: (_, {
-            refresh
-        }, {
-            dataSources
-        }) =>
-        dataSources.authAPI.refreshToken(refresh),
+        refreshToken: (_, { refresh }, { dataSources }) =>
+            dataSources.authAPI.refreshToken(refresh),
+    }
 
-}
+};
 module.exports = usersResolver;

@@ -1,7 +1,7 @@
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
-const TurnosAPI = require('./dataSources/turnos_api');
+const TurnsAPI = require('./dataSources/turnos_api');
 const AuthAPI = require('./dataSources/auth_api');
 const authentication = require('./utils/authentication');
 const server = new ApolloServer({
@@ -9,7 +9,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     dataSources: () => ({
-        TurnosAPI: new TurnosAPI(),
+        TurnsAPI: new TurnsAPI(),
         authAPI: new AuthAPI(),
     }),
     introspection: true,
