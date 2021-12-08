@@ -36,7 +36,7 @@ public class TurnController {
         calendar2.setTime(entity.getLastChange());
 
 
-        if (calendar1.get(Calendar.HOUR_OF_DAY) >= 17 || calendar1.get(Calendar.HOUR_OF_DAY) <= 8){
+        if (calendar1.get(Calendar.HOUR_OF_DAY) >= 12 || calendar1.get(Calendar.HOUR_OF_DAY) <= 3){
             throw new LateTurnException("No hay turnos disponibles en este horario");
         }
 
