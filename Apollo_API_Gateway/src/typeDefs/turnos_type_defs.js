@@ -7,7 +7,7 @@ const turnsTypeDefs = gql `
         document: Int!
         names: String!
         lastName: String!
-        phone: Int!
+        phone: String!
         date: String!
         turn: Int!
     }
@@ -17,7 +17,7 @@ const turnsTypeDefs = gql `
         document: Int!
         names: String!
         lastName: String!
-        phone: Int!
+        phone: String!
     }
 
     extend type Query {
