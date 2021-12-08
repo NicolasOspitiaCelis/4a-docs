@@ -14,13 +14,13 @@ public class Turn {
     private Date date;
     private Integer turn;
 
-    private Turn(String id, String entity, Long document, String names, String lastName, String number){
+    private Turn(String id, String entity, Long document, String names, String lastName, String phone){
         this.id = id;
         this.entity = entity;
         this.document = document;
         this.names = names;
         this.lastName = lastName;
-        this.phone = number;
+        this.phone = phone;
     }
 
     public String getId() {
