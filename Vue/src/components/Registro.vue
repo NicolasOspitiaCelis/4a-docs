@@ -20,10 +20,10 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import gql from "graphql-tag";
 export default {
   name: "SignUp",
-  data: function() {
+  data: function () {
     return {
       user: {
         username: "",
@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    processSignUp: function() {
+    processSignUp: function () {
       axios
         .post("https://supermercado-be.herokuapp.com/user/", this.user, {
           headers: {},
@@ -54,7 +54,7 @@ export default {
           alert(error);
         });
     },
-    loadLogin: function() {
+    loadLogin: function () {
       this.$router.push({ name: "iniciar" });
     },
   },
@@ -69,7 +69,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .container_signUp_user {
   border: 3px solid #283747;

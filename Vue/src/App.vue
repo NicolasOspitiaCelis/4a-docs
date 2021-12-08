@@ -13,6 +13,7 @@
         <button v-if="!is_auth" v-on:click="cargarIniciarS">
           Iniciar sesión
         </button>
+        <button v-on:click="toReport">Lista</button>
       </nav>
     </div>
     <br />
@@ -30,6 +31,8 @@ export default {
     return {
       is_auth: false,
       in_inicio: true,
+      in_admin: false,
+      in_report: false,
     };
   },
   methods: {
@@ -40,11 +43,19 @@ export default {
     },
     toInicio: function () {
       this.in_inicio = true;
-      this.$router.push({ name: "ingresarInventario" });
+      this.$router.push({ name: "inicio" });
     },
     toAdmin: function () {
       this.in_inicio = false;
+      this.in_report = false;
+      this.in_admin = true;
       this.$router.push({ name: "administrar" });
+    },
+    toReport: function () {
+      this.in_inicio = false;
+      this.in_report = true;
+      this.in_admin = false;
+      this.$router.push({ name: "reporte" });
     },
     logOut: function () {
       alert("Sesión Cerrada, Hasta luego " + localStorage.getItem("username"));
@@ -65,7 +76,6 @@ export default {
   },
   created: function () {
     this.verifyAuth();
-    localStorage.setItem("inInicio", true);
   },
 };
 </script>
