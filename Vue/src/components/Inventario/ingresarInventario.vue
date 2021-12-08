@@ -1,16 +1,11 @@
 <template>
-  <button
-    class="regresar"
-    @click="$router.push('/user/administrar/g_inventario')"
-  >
-    Regresar
-  </button>
+  
   <div class="cont">
     <div class="contenedor">
-      <h1>Registrar Inventario</h1>
+      <h1>Turno CAR</h1>
       <form v-on:submit.prevent="ingresarInventario">
         <div class="input-form">
-          <label for="nombre">Id Producto: </label>
+          <label for="nombre">Documento : </label>
           <input type="number" v-model="inventario.producto" />
         </div>
         <div class="input-form">
@@ -18,15 +13,19 @@
           <input type="text" v-model="inventario.name" />
         </div>
         <div class="input-form">
-          <label for="nombre">Categoria : </label>
+          <label for="nombre">Apellido : </label>
           <input type="text" v-model="inventario.category" />
         </div>
         <div class="input-form">
-          <label for="nombre">Cantidad : </label>
+          <label for="nombre">Telefono : </label>
           <input type="number" v-model="inventario.amount" />
         </div>
+        <div class="input-form">
+          <label for="nombre">Entidad : </label>
+           <input type="text" v-model="inventario.category" />
+        </div>
         <div class="btn-cont">
-          <button class="form-button" type="submit">Registrar</button>
+          <button class="form-button" type="submit">Generar turno</button>
         </div>
       </form>
     </div>
@@ -103,7 +102,7 @@ export default {
   margin: auto;
   height: 450px;
   min-width: 450px;
-  background: #9f83fa;
+  background: #1fce54;
   border-radius: 20px;
   align-items: center;
   padding: 10px;
@@ -142,7 +141,7 @@ export default {
 }
 
 .btn-cont > .form-button:hover {
-  background-color: crimson;
+  background-color: #3475ec;
 }
 
 .btn-cont {

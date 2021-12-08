@@ -61,7 +61,7 @@ export default {
   align-items: center;
 }
 .container_logIn_user {
-  border: 3px solid #9f83fa;
+  border: 3px solid #1fce54;
   border-radius: 10px;
   width: 25%;
   height: 60%;
@@ -71,7 +71,7 @@ export default {
   align-items: center;
 }
 .logIn_user h2 {
-  color: crimson;
+  color: #3475ec;
 }
 .logIn_user form {
   width: 70%;
@@ -82,14 +82,14 @@ export default {
   box-sizing: border-box;
   padding: 10px 20px;
   margin: 5px 0;
-  border: 1px solid #9f83fa;
+  border: 1px solid #1fce54;
   border-radius: 5px;
 }
 .logIn_user button {
   width: 100%;
   height: 40px;
   color: #e5e7e9;
-  background: #9f83fa;
+  background: #1fce54;
   border: 1px solid #e5e7e9;
   border-radius: 5px;
   padding: 10px 25px;

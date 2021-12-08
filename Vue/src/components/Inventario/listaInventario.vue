@@ -8,15 +8,14 @@
     </button>
     <div class="cont">
       <div class="contenedor">
-        <h1>Lista de Productos en inventario</h1>
+        <h1>Reporte de turnos</h1>
 
         <table>
           <tr>
-            <th>Id Inventario</th>
-            <th>Nombre</th>
-            <th>Categoria</th>
-            <th>Id Producto</th>
-            <th>Cantidad</th>
+            <th>Numero turno</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Usuario</th>
           </tr>
           <tr v-for="inventario in inventarios" :key="inventario.id">
             <td v-text="inventario.id"></td>
@@ -93,8 +92,8 @@ export default {
 .contenedor {
   margin: auto;
   height: auto;
-  min-width: 450px;
-  background: #9f83fa;
+  min-width: 600px;
+  background: #1fce54;
   border-radius: 20px;
   align-items: center;
   padding: 10px;
@@ -164,9 +163,9 @@ button:hover {
 }
 
 table {
-  border: 2px solid #9f83fa;
+  border: 2px solid #1fce54;
   border-radius: 3px;
-  background-color: #9f83fa;
+  background-color: #1fce54;
   font-size: 20px;
   color: white;
   text-align: center;
@@ -174,7 +173,7 @@ table {
 th {
   background-color: #ffffff;
   font-size: 30px;
-  color: #9f83fa;
+  color: #1fce54;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

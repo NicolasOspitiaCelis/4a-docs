@@ -7,16 +7,16 @@
   </button>
 
   <div class="contenedor">
-    <h1>Eliminar Inventario</h1>
+    <h1>Su Turno</h1>
     <form v-if="!encontrado" v-on:submit.prevent="getInventario">
       <div class="input-form">
-        <label for="nombre">Id inventario: </label>
-        <input type="number" id="id" />
+        <input type="text" id="id" />
       </div>
-
-      <div class="btn-cont">
-        <button class="form-button" type="submit">Buscar</button>
-      </div>
+      <hr>
+      <h1>Entidad</h1>
+        <div class="input-form">
+          <input type="text" id="id" />
+        </div>
     </form>
     <br />
     <div v-if="encontrado">
@@ -156,7 +156,7 @@ export default {
   height: 450px;
   width: 500px;
   padding: 10px;
-  background: #9f83fa;
+  background: #1fce54;
   border-radius: 20px;
   align-items: center;
   display: flex;

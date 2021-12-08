@@ -4,7 +4,7 @@
       <nav>
         <button v-on:click="toInicio">Inicio</button>
       </nav>
-      <h1>CompraYa</h1>
+      <h1>CAR</h1>
       <nav>
         <button v-if="in_inicio && is_auth" v-on:click="toAdmin">
           Administración
@@ -40,7 +40,7 @@ export default {
     },
     toInicio: function () {
       this.in_inicio = true;
-      this.$router.push({ name: "inicio" });
+      this.$router.push({ name: "ingresarInventario" });
     },
     toAdmin: function () {
       this.in_inicio = false;
@@ -93,7 +93,7 @@ export default {
   height: 100px;
   justify-content: space-around;
   align-items: center;
-  background: #9f83fa;
+  background: #3475ec;
   border-radius: 20px;
 }
 
@@ -126,7 +126,7 @@ nav {
   filter: blur(0.3px);
   border-radius: 20px;
   color: #e5e7e9;
-  background: crimson;
+  background: #1fce54;
   border: 1px solid #283747;
 }
 </style>

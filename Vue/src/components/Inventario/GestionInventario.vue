@@ -7,9 +7,6 @@
     <button @click="$router.push('/user/administrar/g_inventario/ingresar')">
       Ingresar producto a inventario
     </button>
-    <button @click="$router.push('/user/administrar/g_inventario/actualizar')">
-      Actualizar producto de inventario
-    </button>
     <button @click="$router.push('/user/administrar/g_inventario/reporte')">
       Reporte de productos en inventario
     </button>
