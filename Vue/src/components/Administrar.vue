@@ -6,25 +6,18 @@
       <h1>
         Bienvenid@ <span>{{ username }}</span>
       </h1>
-      <h2>
-        Reporte de turnos CAR
-      </h2>
-      <select>
-        <option selected value ="0">Elige una opcion</option>
-        <optgroup>
-          <option value="1">Acueducto</option>
-          <option value="2">Energia</option>
-          <option value="3">Policia</option>
-          <option value="4">Hacienda</option>
-          <option value="5">Dian</option>
-          <option value="6">Educacion</option>
-          <option value="7">ICBF</option>
-          <option value="8">Comisaria</option>
-        </optgroup>
+      <select id="selected">
+        <option selected value="0">Elige una opcion</option>
+        <option value="1">Acueducto</option>
+        <option value="2">Energia</option>
+        <option value="3">Policia</option>
+        <option value="4">Hacienda</option>
+        <option value="5">Dian</option>
+        <option value="6">Educacion</option>
+        <option value="7">ICBF</option>
+        <option value="8">Comisaria</option>
       </select>
-      <button @click="$router.push('/user/administrar/g_inventario')">
-        Gestión de inventario
-      </button>
+      <button v-on:click="generarReporte">Generar reporte</button>
     </div>
   </div>
 </template>
@@ -40,7 +33,15 @@ export default {
       username: localStorage.getItem("username") || "none",
     };
   },
-  methods: {},
+  methods: {
+    generarReporte: function () {
+      let combo = document.getElementById("selected");
+      if (combo.options[combo.selectedIndex].text == "Elige una opcion")
+        return alert("Debes elegir una opción para generar un reporte");
+      let selected = combo.options[combo.selectedIndex].text;
+      return this.$emit("toReport", selected);
+    },
+  },
   created: function () {
     if (localStorage.getItem("isAuth") == false) $router.push("/user/iniciar");
   },
@@ -65,6 +66,7 @@ export default {
 }
 .UserView {
   margin: 10px 0px 0px 500px;
+  background: #1fce54;
 }
 div {
   margin: 10px 0px 0px -450px;
@@ -95,7 +97,7 @@ select {
   transition: all 0.5s;
 }
 select:hover {
-    width: 300px;
+  width: 300px;
   height: 40px;
   text-align: center;
   font-size: 20px;

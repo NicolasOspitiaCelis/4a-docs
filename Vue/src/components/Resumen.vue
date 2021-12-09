@@ -3,7 +3,7 @@
     <button class="regresar" v-on:click="regresar">Regresar</button>
     <div class="cont">
       <div class="contenedor">
-        <h1>Reporte de turnos de {{ reporte }}</h1>
+        <h1>Resumen del turno generado</h1>
 
         <table>
           <tr>
@@ -12,14 +12,11 @@
             <th>Nombre</th>
             <th>Apellidos</th>
           </tr>
-          <tr v-for="turno in turnos" :key="turno.id">
-            <td v-if="turno.entity == this.reporte" v-text="turno.turn"></td>
-            <td v-if="turno.entity == this.reporte" v-text="turno.date"></td>
-            <td v-if="turno.entity == this.reporte" v-text="turno.names"></td>
-            <td
-              v-if="turno.entity == this.reporte"
-              v-text="turno.lastName"
-            ></td>
+          <tr>
+            <td>{{ turno.turn }}</td>
+            <td>{{ turno.date }}</td>
+            <td>{{ turno.names }}</td>
+            <td>{{ turno.lastName }}</td>
           </tr>
         </table>
       </div>
@@ -27,27 +24,21 @@
   </div>
 </template>
 <script>
-import gql from "graphql-tag";
 export default {
-  name: "reporte",
+  name: "resumen",
   data: function () {
     return {
-      turnos: [],
-      reporte: "",
+      turno: {},
     };
-  },
-  apollo: {
-    turnos: {
-      query: gql``,
-    },
   },
   methods: {
     regresar: function () {
-      this.$emit("toAdmin");
+      this.$emit("toInicio");
     },
+    getLista: async function () {},
   },
   created: function () {
-    this.reporte = localStorage.getItem("reporte");
+    this.turno = localStorage.getItem("turn");
   },
 };
 </script>

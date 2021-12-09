@@ -13,12 +13,18 @@
         <button v-if="!is_auth" v-on:click="cargarIniciarS">
           Iniciar sesión
         </button>
-        <button v-on:click="toReport">Lista</button>
       </nav>
     </div>
     <br />
     <div name="main-component">
-      <router-view v-on:completedLogIn="completedLogIn"> </router-view>
+      <router-view
+        v-on:completedLogIn="completedLogIn"
+        v-on:toReport="toReport"
+        v-on:toAdmin="toAdmin"
+        v-on:toResume="toResume"
+        v-on:toInicio="toInicio"
+      >
+      </router-view>
     </div>
   </div>
 </template>
@@ -31,8 +37,6 @@ export default {
     return {
       is_auth: false,
       in_inicio: true,
-      in_admin: false,
-      in_report: false,
     };
   },
   methods: {
@@ -47,15 +51,15 @@ export default {
     },
     toAdmin: function () {
       this.in_inicio = false;
-      this.in_report = false;
-      this.in_admin = true;
       this.$router.push({ name: "administrar" });
     },
-    toReport: function () {
-      this.in_inicio = false;
-      this.in_report = true;
-      this.in_admin = false;
+    toReport: function (report) {
+      localStorage.setItem("reporte", report);
       this.$router.push({ name: "reporte" });
+    },
+    toResume: function (turn) {
+      localStorage.setItem("turn", turn);
+      this.$router.push({ name: "resumen" });
     },
     logOut: function () {
       alert("Sesión Cerrada, Hasta luego " + localStorage.getItem("username"));

@@ -6,8 +6,8 @@ import App from "./App.vue";
 import Inicio from "./components/Inicio.vue";
 import Administrar from "./components/Administrar.vue";
 import Iniciar from "./components/Iniciar.vue";
-import Registro from "./components/Registro.vue";
-import reporte from "./components/Reporte.vue";
+import Reporte from "./components/Reporte.vue";
+import Resumen from "./components/Resumen.vue";
 
 const routes = [{
         path: "/",
@@ -15,19 +15,19 @@ const routes = [{
         component: App,
     },
     {
-        path: "/user/iniciar",
-        name: "iniciar",
-        component: Iniciar,
-    },
-    {
         path: "/inicio",
         name: "inicio",
         component: Inicio,
     },
     {
-        path: "/user/registro",
-        name: "registro",
-        component: Registro,
+        path: "/inicio/resumen",
+        name: "resumen",
+        component: Resumen,
+    },
+    {
+        path: "/user/iniciar",
+        name: "iniciar",
+        component: Iniciar,
     },
     {
         path: "/user/administrar",
@@ -37,7 +37,7 @@ const routes = [{
     {
         path: "/user/administrar/reporte",
         name: "reporte",
-        component: reporte,
+        component: Reporte,
     },
 ];
 

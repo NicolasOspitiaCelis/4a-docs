@@ -57,7 +57,7 @@ export default {
           this.$emit("completedLogIn", dataLogIn);
         })
         .catch((error) => {
-          alert("ERROR 401: Credenciales Incorrectas.");
+          alert("ERROR 401: Credenciales Incorrectas." + error);
         });
     },
   },

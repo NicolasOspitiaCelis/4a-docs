@@ -5,29 +5,29 @@
       <form v-on:submit.prevent="generarTurno">
         <div class="input-form">
           <label for="nombre">Documento : </label>
-          <input type="number" v-model="turno.documento" />
+          <input type="number" v-model="turn.document" />
         </div>
         <div class="input-form">
           <label for="nombre">Nombre : </label>
-          <input type="text" v-model="turno.nombre" />
+          <input type="text" v-model="turn.names" />
         </div>
         <div class="input-form">
           <label for="nombre">Apellidos : </label>
-          <input type="text" v-model="turno.apellidos" />
+          <input type="text" v-model="turn.lastName" />
         </div>
         <div class="input-form">
           <label for="nombre">Telefono : </label>
-          <input type="number" v-model="turno.telefono" />
+          <input type="text" v-model="turn.phone" />
         </div>
         <div class="input-form">
           <label for="nombre">Entidad : </label>
-          <select v-model="turno.entidad">
+          <select v-model="turn.entity">
             <option>Acueducto</option>
-            <option>Energia</option>
-            <option>Policia</option>
+            <option>Energía</option>
+            <option>Policía</option>
             <option>Hacienda</option>
-            <option>Dian</option>
-            <option>Educacion</option>
+            <option>DIAN</option>
+            <option>Educación</option>
             <option>ICBF</option>
             <option>Comisaria</option>
           </select>
@@ -45,14 +45,12 @@ export default {
   name: "inicio",
   data: function () {
     return {
-      turno: {
-        entidad: "",
-        documento: 0,
-        nombre: "",
-        apellidos: "",
-        telefono: 0,
-        fecha: "",
-        turn: 0,
+      turn: {
+        entity: "",
+        document: 0,
+        names: "",
+        lastName: "",
+        phone: "",
       },
     };
   },
@@ -65,39 +63,55 @@ export default {
         this.$emit("logOut");
         return;
       }
-      await this.verifyToken();
-      let token = localStorage.getItem("token_access");
-      axios
-        .post(
-          "https://supermercado-be.herokuapp.com/inventario/",
-          this.inventario,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then(() => {
-          alert("Registro exitoso.");
+      localStorage.setItem("token_access", "");
+      await this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation ($refresh: String!) {
+              refreshToken(refresh: $refresh) {
+                access
+              }
+            }
+          `,
+          variables: {
+            refresh: localStorage.getItem("token_refresh"),
+          },
+        })
+        .then((result) => {
+          localStorage.setItem("token_access", result.data.refreshToken.access);
         })
         .catch((error) => {
-          console.log(error);
-
-          alert(error + ". ERROR: Fallo en el registro del inventario.");
-        });
-    },
-    verifyToken: function () {
-      return axios
-        .post(
-          "https://supermercado-be.herokuapp.com/refresh/",
-          { refresh: localStorage.getItem("token_refresh") },
-          {
-            headers: {},
-          }
-        )
-        .then((result) => {
-          localStorage.setItem("token_access", result.data.access);
-        })
-        .catch(() => {
           this.$emit("logOut");
+          return;
+        });
+
+      await this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation Mutation($turn: TurnInput!) {
+              createTurn(turn: $turn) {
+                id
+                entity
+                document
+                names
+                lastName
+                phone
+                date
+                turn
+              }
+            }
+          `,
+          variables: {
+            turn: this.turn,
+          },
+        })
+        .then((result) => {
+          alert("Turno registrado correctamente");
+          //console.log(result);
+          this.$emit("toResume", result);
+        })
+        .catch((error) => {
+          alert("Error al generar el turno. " + error);
         });
     },
   },
