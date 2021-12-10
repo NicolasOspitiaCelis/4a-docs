@@ -11,17 +11,11 @@
             <th>Nombre</th>
             <th>Apellidos</th>
           </tr>
-          <tr v-for="turno in turnList" :key="turno.date">
-            <td v-if="turno.entity == this.reporte" v-text="turno.turn"></td>
-            <td
-              v-if="turno.entity == this.reporte"
-              v-text="turno.date.substring(0, 10)"
-            ></td>
-            <td v-if="turno.entity == this.reporte" v-text="turno.names"></td>
-            <td
-              v-if="turno.entity == this.reporte"
-              v-text="turno.lastName"
-            ></td>
+          <tr v-for="turno in turnos" :key="turno.date">
+            <td v-text="turno.turn"></td>
+            <td v-text="turno.date.substring(0, 10)"></td>
+            <td v-text="turno.names"></td>
+            <td v-text="turno.lastName"></td>
           </tr>
         </table>
       </div>
@@ -35,6 +29,7 @@ export default {
   data: function () {
     return {
       turnList: [],
+      turnos: [],
       reporte: "",
       cantidad: 0,
     };
@@ -66,10 +61,21 @@ export default {
     regresar: function () {
       this.$emit("toAdmin");
     },
+    filtro: function () {
+      for (
+        var i = 0;
+        i < JSON.parse(JSON.stringify(this.turnList)).length;
+        i++
+      ) {
+        if (JSON.parse(JSON.stringify(this.turnList))[i].entity == this.reporte)
+          this.turnos.push(JSON.parse(JSON.stringify(this.turnList))[i]);
+      }
+    },
   },
   created: function () {
     this.reporte = localStorage.getItem("reporte");
     this.$apollo.queries.turnList.refetch();
+    this.filtro();
   },
 };
 </script>
