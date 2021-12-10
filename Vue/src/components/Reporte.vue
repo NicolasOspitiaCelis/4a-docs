@@ -2,7 +2,7 @@
   <div>
     <button class="regresar" v-on:click="regresar">Regresar</button>
     <div class="cont">
-      <div class="contenedor">
+      <div class="contenedor" v-if="!isEmpty">
         <h1>Reporte de turnos de {{ reporte }}</h1>
         <table>
           <tr>
@@ -19,6 +19,9 @@
           </tr>
         </table>
       </div>
+      <div class="contenedor" v-if="isEmpty">
+        <h1>No existen turnos de {{ reporte }}</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +34,7 @@ export default {
       turnList: [],
       turnos: [],
       reporte: "",
-      cantidad: 0,
+      isEmpty: false,
     };
   },
   apollo: {
@@ -70,6 +73,7 @@ export default {
         if (JSON.parse(JSON.stringify(this.turnList))[i].entity == this.reporte)
           this.turnos.push(JSON.parse(JSON.stringify(this.turnList))[i]);
       }
+      if (this.turnos.length == 0) this.isEmpty = true;
     },
   },
   created: function () {
