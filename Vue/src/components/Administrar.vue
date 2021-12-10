@@ -9,11 +9,11 @@
       <select id="selected">
         <option selected value="0">Elige una opcion</option>
         <option value="1">Acueducto</option>
-        <option value="2">Energia</option>
-        <option value="3">Policia</option>
+        <option value="2">Energía</option>
+        <option value="3">Policía</option>
         <option value="4">Hacienda</option>
-        <option value="5">Dian</option>
-        <option value="6">Educacion</option>
+        <option value="5">DIAN</option>
+        <option value="6">Educación</option>
         <option value="7">ICBF</option>
         <option value="8">Comisaria</option>
       </select>
@@ -23,6 +23,7 @@
 </template>
 <script>
 import UserView from "./shared/empleadoView.vue";
+import gql from "graphql-tag";
 export default {
   name: "Administrar",
   components: {
@@ -34,7 +35,36 @@ export default {
     };
   },
   methods: {
-    generarReporte: function () {
+    generarReporte: async function () {
+      if (
+        localStorage.getItem("token_access") === null ||
+        localStorage.getItem("token_refresh") === null
+      ) {
+        this.$emit("logOut");
+        return;
+      }
+      localStorage.setItem("token_access", "");
+      await this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation ($refresh: String!) {
+              refreshToken(refresh: $refresh) {
+                access
+              }
+            }
+          `,
+          variables: {
+            refresh: localStorage.getItem("token_refresh"),
+          },
+        })
+        .then((result) => {
+          localStorage.setItem("token_access", result.data.refreshToken.access);
+        })
+        .catch((error) => {
+          this.$emit("logOut");
+          return;
+        });
+
       let combo = document.getElementById("selected");
       if (combo.options[combo.selectedIndex].text == "Elige una opcion")
         return alert("Debes elegir una opción para generar un reporte");

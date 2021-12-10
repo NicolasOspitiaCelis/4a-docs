@@ -47,6 +47,7 @@ export default {
     },
     toInicio: function () {
       this.in_inicio = true;
+      localStorage.setItem("turn", "");
       this.$router.push({ name: "inicio" });
     },
     toAdmin: function () {
@@ -58,7 +59,7 @@ export default {
       this.$router.push({ name: "reporte" });
     },
     toResume: function (turn) {
-      localStorage.setItem("turn", turn);
+      localStorage.setItem("turn", JSON.stringify(turn));
       this.$router.push({ name: "resumen" });
     },
     logOut: function () {
@@ -80,6 +81,7 @@ export default {
   },
   created: function () {
     this.verifyAuth();
+    this.$router.push({ name: "inicio" });
   },
 };
 </script>

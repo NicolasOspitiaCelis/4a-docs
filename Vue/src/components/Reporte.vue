@@ -4,7 +4,6 @@
     <div class="cont">
       <div class="contenedor">
         <h1>Reporte de turnos de {{ reporte }}</h1>
-
         <table>
           <tr>
             <th>Numero turno</th>
@@ -12,9 +11,12 @@
             <th>Nombre</th>
             <th>Apellidos</th>
           </tr>
-          <tr v-for="turno in turnos" :key="turno.id">
+          <tr v-for="turno in turnList" :key="turno.date">
             <td v-if="turno.entity == this.reporte" v-text="turno.turn"></td>
-            <td v-if="turno.entity == this.reporte" v-text="turno.date"></td>
+            <td
+              v-if="turno.entity == this.reporte"
+              v-text="turno.date.substring(0, 10)"
+            ></td>
             <td v-if="turno.entity == this.reporte" v-text="turno.names"></td>
             <td
               v-if="turno.entity == this.reporte"
@@ -32,13 +34,32 @@ export default {
   name: "reporte",
   data: function () {
     return {
-      turnos: [],
+      turnList: [],
       reporte: "",
+      cantidad: 0,
     };
   },
   apollo: {
-    turnos: {
-      query: gql``,
+    turnList: {
+      query: gql`
+        query TurnList($username: String!) {
+          turnList(username: $username) {
+            id
+            entity
+            document
+            names
+            lastName
+            phone
+            date
+            turn
+          }
+        }
+      `,
+      variables() {
+        return {
+          username: localStorage.getItem("username"),
+        };
+      },
     },
   },
   methods: {
@@ -48,6 +69,7 @@ export default {
   },
   created: function () {
     this.reporte = localStorage.getItem("reporte");
+    this.$apollo.queries.turnList.refetch();
   },
 };
 </script>

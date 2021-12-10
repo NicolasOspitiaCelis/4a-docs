@@ -13,10 +13,12 @@
             <th>Apellidos</th>
           </tr>
           <tr>
-            <td>{{ turno.turn }}</td>
-            <td>{{ turno.date }}</td>
-            <td>{{ turno.names }}</td>
-            <td>{{ turno.lastName }}</td>
+            <td>{{ turno.data.createTurn.turn }}</td>
+            <td>
+              {{ turno.data.createTurn.date.substring(0, 10) }}
+            </td>
+            <td>{{ turno.data.createTurn.names }}</td>
+            <td>{{ turno.data.createTurn.lastName }}</td>
           </tr>
         </table>
       </div>
@@ -35,10 +37,9 @@ export default {
     regresar: function () {
       this.$emit("toInicio");
     },
-    getLista: async function () {},
   },
   created: function () {
-    this.turno = localStorage.getItem("turn");
+    this.turno = JSON.parse(localStorage.getItem("turn"));
   },
 };
 </script>
